@@ -1,14 +1,14 @@
 #!/bin/bash -e
 echo
-echo "### removing elasticsearch"
+echo "### removing elasticsearch_new"
 
 # delete mysql if exists
-if ! [[ -z `docker inspect --format="{{ .State.Running }}" elasticsearch` ]]; then
-  docker rm -f elasticsearch
+if ! [[ -z `docker inspect --format="{{ .State.Running }}" elasticsearch_new` ]]; then
+  docker rm -f elasticsearch_new
 fi
 
 echo
-echo "### running elasticsearch"
+echo "### running elasticsearch_new"
 echo
 
 MAX_NETWORK=${MAX_NETWORK:='max-network'}
