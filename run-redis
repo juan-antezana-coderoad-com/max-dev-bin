@@ -1,0 +1,25 @@
+#!/bin/bash -e
+echo
+echo "### removing redis"
+
+# delete redis if exists
+if ! [[ -z `docker inspect --format="{{ .State.Running }}" redis` ]]; then
+  docker rm -f redis
+fi
+
+echo
+echo "### running redis"
+echo
+
+MAX_NETWORK=${MAX_NETWORK:='max-network'}
+MAX_REDIS_HOST=${MAX_REDIS_HOST:='172.18.0.30'}
+echo "MAX_NETWORK: $MAX_NETWORK"
+echo "MAX_REDIS_HOST: $MAX_REDIS_HOST"
+echo
+
+docker run -d --name redis -h redis \
+--network $MAX_NETWORK \
+--ip $MAX_REDIS_HOST \
+-p 6379:6379 \
+-v ~/docker-volumes/redis-data:/data \
+redis

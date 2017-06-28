@@ -11,7 +11,7 @@ echo
 echo "### running mysql"
 echo
 
-MAX_NETWORK=${MAX_NETWORK:='vizix-network'}
+MAX_NETWORK=${MAX_NETWORK:='max-network'}
 MAX_MYSQL_HOST=${MAX_MYSQL_HOST:='172.18.0.10'}
 echo "MAX_NETWORK: $MAX_NETWORK"
 echo "MAX_MYSQL_HOST: $MAX_MYSQL_HOST"
