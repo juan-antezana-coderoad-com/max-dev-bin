@@ -1,0 +1,41 @@
+#!/bin/bash -e
+
+echo
+echo " ###################################################### "
+echo " #  ÛÛÛÛÛ   ÛÛÛÛÛ  ÛÛÛ  ÛÛÛÛÛÛÛÛÛÛÛ  ÛÛÛ  ÛÛÛÛÛ ÛÛÛÛÛ # "
+echo " # °°ÛÛÛ   °°ÛÛÛ  °°°  °Û°°°°°°ÛÛÛ  °°°  °°ÛÛÛ °°ÛÛÛ  # "
+echo " #  °ÛÛÛ    °ÛÛÛ  ÛÛÛÛ °     ÛÛÛ°   ÛÛÛÛ  °°ÛÛÛ ÛÛÛ   # "
+echo " #  °ÛÛÛ    °ÛÛÛ °°ÛÛÛ      ÛÛÛ    °°ÛÛÛ   °°ÛÛÛÛÛ    # "
+echo " #  °°ÛÛÛ   ÛÛÛ   °ÛÛÛ     ÛÛÛ      °ÛÛÛ    ÛÛÛ°ÛÛÛ   # "
+echo " #   °°°ÛÛÛÛÛ°    °ÛÛÛ   ÛÛÛÛ     Û °ÛÛÛ   ÛÛÛ °°ÛÛÛ  # "
+echo " #     °°ÛÛÛ      ÛÛÛÛÛ ÛÛÛÛÛÛÛÛÛÛÛ ÛÛÛÛÛ ÛÛÛÛÛ ÛÛÛÛÛ # "
+echo " #      °°°      °°°°° °°°°°°°°°°° °°°°° °°°°° °°°°°  # "
+echo " ###################################################### "
+echo
+
+export CURRENT_DIRECTORY=`dirname "$BASH_SOURCE"`
+export MAX_SRC_HOME=`dirname "$CURRENT_DIRECTORY"`
+
+export MAX_NETWORK=max-network
+export MAX_SUBNET=172.18.0.0/23
+
+export MAX_HOSTNAME=$(ip route get 8.8.8.8 | awk '/8.8.8.8/ {print $NF}')
+export MAX_MYSQL_HOST='172.18.0.10'
+export MAX_ELASTIC_SEARCH_HOST='172.18.0.20'
+export MAX_ZOOKEEPER_HOST='172.18.0.70'
+export MAX_KAFKA_HOST='172.18.0.80'
+
+echo "MAX_SRC_HOME: $MAX_SRC_HOME"
+
+echo "MAX_NETWORK: $MAX_NETWORK"
+echo "MAX_SUBNET: $MAX_SUBNET"
+
+echo "MAX_HOSTNAME: $MAX_HOSTNAME"
+echo "MAX_MYSQL_HOST: $MAX_MYSQL_HOST"
+echo "MAX_ELASTIC_SEARCH_HOST: $MAX_ELASTIC_SEARCH_HOST"
+echo "MAX_ZOOKEEPER_HOST: $MAX_ZOOKEEPER_HOST"
+echo "MAX_KAFKA_HOST: $MAX_KAFKA_HOST"
+echo
+
+
+

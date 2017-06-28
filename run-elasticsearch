@@ -1,0 +1,26 @@
+#!/bin/bash -e
+echo
+echo "### removing elasticsearch"
+
+# delete mysql if exists
+if ! [[ -z `docker inspect --format="{{ .State.Running }}" elasticsearch` ]]; then
+  docker rm -f elasticsearch
+fi
+
+echo
+echo "### running elasticsearch"
+echo
+
+MAX_NETWORK=${MAX_NETWORK:='max-network'}
+MAX_ELASTIC_SEARCH_HOST=${MAX_ELASTIC_SEARCH_HOST:='172.18.0.20'}
+echo "MAX_NETWORK: $MAX_NETWORK"
+echo "MAX_ELASTIC_SEARCH_HOST: $MAX_ELASTIC_SEARCH_HOST"
+echo
+
+docker run -d --name elasticsearch_new -h elasticsearch_new \
+--network $MAX_NETWORK \
+--ip $MAX_ELASTIC_SEARCH_HOST \
+-p 9200:9200 \
+-p 9300:9300 \
+-v ~/docker-volumes/elasticsearch-data:/usr/share/elasticsearch/data \
+elasticsearch
