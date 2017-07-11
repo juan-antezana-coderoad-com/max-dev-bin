@@ -1,0 +1,25 @@
+#!/bin/bash -e
+echo
+echo "### removing product order backend"
+echo
+
+# delete services if exists
+if ! [[ -z `docker inspect --format="{{ .State.Running }}" productorderbackend` ]]; then
+  docker rm -f productorderbackend
+fi
+
+echo
+echo "### running product order backend"
+echo
+
+MAX_NETWORK=${MAX_NETWORK:='max2-network'}
+MAX_PRODUCT_ORDER_BACKEND_HOST=${MAX_PRODUCT_ORDER_BACKEND_HOST:='172.18.0.30'}
+echo "MAX_NETWORK: $MAX_NETWORK"
+echo "MAX_PRODUCT_ORDER_BACKEND_HOST: $MAX_PRODUCT_ORDER_BACKEND_HOST"
+echo
+
+docker run -d --name productorderbackend -h productorderbackend \
+--network $MAX_NETWORK \
+--ip $MAX_PRODUCT_ORDER_BACKEND_HOST \
+-p 9000:9000 \
+max2-product-order-backend

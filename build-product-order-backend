@@ -1,0 +1,9 @@
+#!/bin/bash -e
+echo
+#echo "### building code"
+#echo
+#sbt clean compile stage
+#echo
+echo "### building docker"
+echo
+docker build -t max2-product-order-backend .
