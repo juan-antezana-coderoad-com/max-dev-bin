@@ -1,0 +1,9 @@
+#!/bin/bash -e
+
+echo
+echo "### building weave scope"
+echo
+
+curl -L git.io/scope -o /usr/local/bin/scope
+chmod a+x /usr/local/bin/scope
+scope launch
