@@ -2,7 +2,7 @@
 echo
 #echo "### building code"
 #echo
-#sbt clean compile stage
+sbt clean compile stage
 #echo
 echo "### building docker"
 echo
