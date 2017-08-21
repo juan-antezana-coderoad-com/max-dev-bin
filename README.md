@@ -15,8 +15,11 @@
 ## CONTAINERS
 - 172.18.0.10   : Mysql
 - 172.18.0.20   : Elastic Search
+- 172.18.0.30   : Product Order Backend
+- 172.18.0.40   : Party Management Backend
 - 172.18.0.70   : Zookeeper
 - 172.18.0.80   : Kafka
+
 
 ## SETUP
 

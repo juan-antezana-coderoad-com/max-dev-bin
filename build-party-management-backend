@@ -6,4 +6,4 @@ sbt clean compile stage
 #echo
 echo "### building docker"
 echo
-docker build -t max2-product-order-backend .
+docker build -t max2-party-management-backend .
