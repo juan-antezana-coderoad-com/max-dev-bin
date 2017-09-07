@@ -21,7 +21,7 @@ docker run -d --name mysql -h mysql \
 --network $MAX_NETWORK \
 --ip $MAX_MYSQL_HOST \
 -p 3306:3306 \
--e MYSQL_DATABASE=riot_main \
+-e MYSQL_DATABASE=bss_oss_users \
 -e MYSQL_ROOT_PASSWORD=control123! \
 -v ~/docker-volumes/mysql-data:/var/lib/mysql \
 -v ~/docker-volumes/mysql-tmp:/tmp/mysql \
