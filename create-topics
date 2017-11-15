@@ -15,7 +15,7 @@ echo
 create_topic ProductOrderCreated 3
 create_topic ProductOrderUpdated 3
 create_topic BSSProductOrder 3
-create_topic OrganizationCreated 3
+create_topic BSSOrganization 3
 create_topic organizationCreationNotification 3
 
 echo
