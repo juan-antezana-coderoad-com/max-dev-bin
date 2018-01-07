@@ -25,17 +25,12 @@
 
 1. Add bin folder to OS's PATH (Preferably in folder where other vizix projects are )
 
-   For Fedora
-   ```sh
-   # add to /etc/bashrc
-   export PATH="$PATH:<max-projects-folder>/max-dev-bin"
-   source <max-projects-folder>/max-dev-bin/set-env
-   ```
    For Debian/Ubuntu
    ```sh
    # add to ~/.bashrc
-   export PATH="$PATH:<max-projects-folder>/max-dev-bin"
-   source <max-projects-folder>/max-dev-bin/set-env
+   export MAX_HOME=<max-projects-folder>/max-dev-bin
+   export PATH="$PATH:$MAX_HOME"
+   source $MAX_HOME/set-env
    ```
    
 2. Open a new terminal.
