@@ -17,6 +17,7 @@ create_topic ProductOrderUpdated 3
 create_topic BSSProductOrder 3
 create_topic BSSOrganization 3
 create_topic organizationCreationNotification 3
+create_topic merchantUpdated 3
 
 echo
 echo "-----------------"
