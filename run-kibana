@@ -1,0 +1,27 @@
+#!/bin/bash -e
+echo
+echo "### removing kibana"
+
+# delete kibana if exists
+if ! [[ -z `docker inspect --format="{{ .State.Running }}" kibana` ]]; then
+  docker rm -f kibana
+fi
+
+echo
+echo "### running kibana"
+echo
+
+MAX_NETWORK=${MAX_NETWORK:='max-network'}
+MAX_KIBANA_HOST=${MAX_KIBANA_HOST:='172.18.0.25'}
+MAX_ELASTIC_SEARCH_HOST=${MAX_ELASTIC_SEARCH_HOST:='172.18.0.20'}
+echo "MAX_NETWORK: $MAX_NETWORK"
+echo "MAX_KIBANA_HOST: $MAX_KIBANA_HOST"
+echo "MAX_ELASTIC_SEARCH_HOST: $MAX_ELASTIC_SEARCH_HOST"
+echo
+
+docker run -d --name kibana -h kibana \
+--network $MAX_NETWORK \
+--ip $MAX_KIBANA_HOST \
+-p 5601:5601 \
+-e ELASTICSEARCH_URL=http://${MAX_ELASTIC_SEARCH_HOST}:9200 \
+kibana:4.4
