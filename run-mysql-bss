@@ -1,25 +1,25 @@
 #!/bin/bash -e
 echo
-echo "### removing mysql"
+echo "### removing mysql-bss"
 
 # delete mysql if exists
-if ! [[ -z `docker inspect --format="{{ .State.Running }}" mysql` ]]; then
-  docker rm -f mysql
+if ! [[ -z `docker inspect --format="{{ .State.Running }}" mysql-bss` ]]; then
+  docker rm -f mysql-bss
 fi
 
 echo
-echo "### running mysql"
+echo "### running mysql-bss"
 echo
 
 MAX_NETWORK=${MAX_NETWORK:='max-network'}
-MAX_MYSQL_HOST=${MAX_MYSQL_HOST:='172.18.0.10'}
+MAX_MYSQL_BSS_HOST=${MAX_MYSQL_BSS_HOST:='172.18.0.10'}
 echo "MAX_NETWORK: $MAX_NETWORK"
-echo "MAX_MYSQL_HOST: $MAX_MYSQL_HOST"
+echo "MAX_MYSQL_BSS_HOST: $MAX_MYSQL_BSS_HOST"
 echo
 
-docker run -d --name mysql -h mysql \
+docker run -d --name mysql-bss -h mysql-bss \
 --network $MAX_NETWORK \
---ip $MAX_MYSQL_HOST \
+--ip $MAX_MYSQL_BSS_HOST \
 -p 3306:3306 \
 -e MYSQL_DATABASE=bss_oss_users \
 -e MYSQL_ROOT_PASSWORD=control123! \
