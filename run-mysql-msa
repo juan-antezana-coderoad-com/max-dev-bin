@@ -21,7 +21,7 @@ docker run -d --name mysql-msa -h mysql-msa \
 --network $MAX_NETWORK \
 --ip $MAX_MYSQL_MSA_HOST \
 -p 3308:3306 \
--e MYSQL_DATABASE=maxdb \
+-e MYSQL_DATABASE=msadb \
 -e MYSQL_ROOT_PASSWORD=admin \
 -e MYSQL_USER=playservices \
 -e MYSQL_PASSWORD=play \
