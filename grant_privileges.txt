@@ -1,0 +1,10 @@
+#!/bin/bash -e
+GRANT ALL PRIVILEGES ON *.* TO 'root'@'%';
+GRANT ALL PRIVILEGES ON *.* TO 'root'@'localhost' IDENTIFIED BY 'admin';
+GRANT ALL PRIVILEGES ON *.* TO 'root'@'127.0.0.1' IDENTIFIED BY 'admin';
+GRANT ALL PRIVILEGES ON *.* TO 'playservices'@'%';
+GRANT ALL PRIVILEGES ON *.* TO 'playservices'@'localhost' IDENTIFIED BY 'play';
+GRANT ALL PRIVILEGES ON *.* TO 'playservices'@'127.0.0.1' IDENTIFIED BY 'play';
+FLUSH PRIVILEGES;
+
+SELECT host, user FROM mysql.user;
