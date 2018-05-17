@@ -12,7 +12,7 @@ echo "### running mysql-msa"
 echo
 
 MAX_NETWORK=${MAX_NETWORK:='max-network'}
-MAX_MYSQL_MSA_HOST=${MAX_MYSQL_MSA_HOST:='172.18.0.12'}
+MAX_MYSQL_MSA_HOST=${MAX_MYSQL_MSA_HOST:='172.18.0.13'}
 echo "MAX_NETWORK: $MAX_NETWORK"
 echo "MAX_MYSQL_MSA_HOST: $MAX_MYSQL_MSA_HOST"
 echo
@@ -20,7 +20,7 @@ echo
 docker run -d --name mysql-msa -h mysql-msa \
 --network $MAX_NETWORK \
 --ip $MAX_MYSQL_MSA_HOST \
--p 3308:3306 \
+-p 3309:3306 \
 -e MYSQL_DATABASE=msadb \
 -e MYSQL_ROOT_PASSWORD=admin \
 -e MYSQL_USER=playservices \

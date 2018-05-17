@@ -12,7 +12,7 @@ echo "### running mysql"
 echo
 
 MAX_NETWORK=${MAX_NETWORK:='max-network'}
-MAX_MYSQL_HOST=${MAX_MYSQL_HOST:='172.18.0.10'}
+MAX_MYSQL_HOST=${MAX_MYSQL_HOST:='172.18.0.14'}
 echo "MAX_NETWORK: $MAX_NETWORK"
 echo "MAX_MYSQL_HOST: $MAX_MYSQL_HOST"
 echo
@@ -20,7 +20,7 @@ echo
 docker run -d --name mysql -h mysql \
 --network $MAX_NETWORK \
 --ip $MAX_MYSQL_HOST \
--p 3306:3306 \
+-p 3310:3306 \
 -e MYSQL_DATABASE=authdb \
 -e MYSQL_ROOT_PASSWORD=control123! \
 -e MYSQL_USER=playservices \
