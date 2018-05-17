@@ -2,4 +2,4 @@
 echo
 echo "### import maxdb"
 
-mysql --host 127.0.0.1 --port 3307 -u root -p maxdb < ~/Dropbox/Projects/Mojix/VeaaConnect/Backups/maxdb_dev_2018_May4.sql
+mysql --host 127.0.0.1 --port 3308 -u root -p maxdb < ~/Dropbox/Projects/Mojix/VeaaConnect/Backups/maxdb_dev_2018_May4.sql
