@@ -27,7 +27,7 @@ docker run -d --name mysql-max -h mysql-max \
 -e MYSQL_PASSWORD=play \
 -v ~/docker-volumes/mysql-data-max:/var/lib/mysql \
 -v ~/docker-volumes/mysql-tmp-max:/tmp/mysql \
-mysql:5.7 \
+mysql:5.6.33 \
 --max_allowed_packet=1024M \
 --max_connections=1500 \
 --query_cache_size=0 \
