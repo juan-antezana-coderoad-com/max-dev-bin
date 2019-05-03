@@ -25,3 +25,13 @@ docker run -d --name kibana -h kibana \
 -p 5601:5601 \
 -e ELASTICSEARCH_URL=http://${MAX_ELASTIC_SEARCH_HOST}:9200 \
 kibana:4.4
+
+echo
+echo "### installing sense"
+echo
+docker exec  kibana /opt/kibana/bin/kibana plugin --install elastic/sense
+
+echo
+echo "### starting kibana"
+echo
+docker restart kibana
