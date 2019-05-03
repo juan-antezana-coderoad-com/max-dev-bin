@@ -1,0 +1,27 @@
+#!/bin/bash -e
+echo
+echo "### removing odoo"
+
+# delete odoo if exists
+if ! [[ -z `docker inspect --format="{{ .State.Running }}" odoo` ]]; then
+  docker rm -f odoo
+fi
+
+echo
+echo "### running odoo"
+echo
+
+MAX_NETWORK=${MAX_NETWORK:='max-network'}
+MAX_ODOO_HOST=${MAX_ODOO_HOST:='172.18.0.40'}
+echo "MAX_NETWORK: $MAX_NETWORK"
+echo "MAX_ODOO_HOST: $MAX_ODOO_HOST"
+echo
+
+docker run -d --name odoo --link db:db -h odoo \
+--network $MAX_NETWORK \
+--ip $MAX_ODOO_HOST \
+-p 8069:8069 \
+-v ~/docker-volumes/odoo-data/odoo-web-data:/var/lib/odoo \
+-v ~/docker-volumes/odoo-data/config:/etc/odoo \
+-v ~/docker-volumes/odoo-data/addons:/mnt/extra-addons \
+odoo

@@ -1,0 +1,29 @@
+#!/bin/bash -e
+echo
+echo "### removing db"
+
+# delete postgresql if exists
+if ! [[ -z `docker inspect --format="{{ .State.Running }}" db` ]]; then
+  docker rm -f db
+fi
+
+echo
+echo "### running postgresql"
+echo
+
+MAX_NETWORK=${MAX_NETWORK:='max-network'}
+MAX_POSTGRESQL_HOST=${MAX_POSTGRESQL_HOST:='172.18.0.15'}
+echo "MAX_NETWORK: $MAX_NETWORK"
+echo "MAX_POSTGRESQL_HOST: $MAX_POSTGRESQL_HOST"
+echo
+
+docker run -d --name db -h postgresql \
+--network $MAX_NETWORK \
+--ip $MAX_POSTGRESQL_HOST \
+-p 3306:3306 \
+-e POSTGRES_DB=odoo \
+-e POSTGRES_USER=odoo \
+-e POSTGRES_PASSWORD=odoo \
+-e PGDATA=/var/lib/postgresql/data/pgdata \
+-v ~/docker-volumes/postgres-data:/var/lib/postgresql/data/pgdata \
+postgres:10
