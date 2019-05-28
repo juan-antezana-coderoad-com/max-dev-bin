@@ -1,0 +1,27 @@
+#!/bin/bash -e
+echo
+echo "### removing cassandra"
+
+# delete cassandra if exists
+if ! [[ -z `docker inspect --format="{{ .State.Running }}" cassandra` ]]; then
+  docker rm -f cassandra
+fi
+
+echo
+echo "### running cassandra"
+echo
+
+MAX_NETWORK=${MAX_NETWORK:='max-network'}
+MAX_CASSANDRA_HOST=${MAX_CASSANDRA_HOST:='172.18.0.50'}
+echo "MAX_NETWORK: $MAX_NETWORK"
+echo "MAX_CASSANDRA_HOST: $MAX_CASSANDRA_HOST"
+echo
+
+docker run -d --name cassandra -h cassandra \
+--network $MAX_NETWORK \
+--ip $MAX_CASSANDRA_HOST \
+-p 9042:9042 \
+-p 7000:7000 \
+-e CASSANDRA_CLUSTER_NAME="Test Cluster" \
+-v ~/docker-volumes/cassandra-data:/var/lib/cassandra \
+cassandra
