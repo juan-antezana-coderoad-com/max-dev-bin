@@ -1,5 +1,5 @@
 #!/bin/bash -e
 echo
-echo "### import maxdb"
+echo "### import msadb"
 
-mysql --host 127.0.0.1 --port 3309 -u root -p msadb < ~/Dropbox/Projects/Mojix/VeaaConnect/Backups/msadb_63_Mar22.sql
+mysql --host 127.0.0.1 --port 3306 -u root -p msadb < ~/Dropbox/Projects/Mojix/VeaaConnect/Backups/msadb_63_Mar22.sql

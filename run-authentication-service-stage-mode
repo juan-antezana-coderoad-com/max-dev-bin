@@ -1,0 +1,24 @@
+#!/bin/bash
+unset http_proxy
+unset https_proxy
+
+cd ~/Max2Inc/
+rm -rf authentication-service/
+git clone https://github.com/Max2Inc/authentication-service
+cd authentication-service/
+git checkout "$1"
+git pull
+
+#config allowed callbacks
+sed -i -e 's|}|},\
+    {\
+      "url": "http://10.100.161.80:3000/*"\
+    }|g' conf/data/initial_data/allowedCallback.json
+
+sbt clean compile stage
+
+#sbt "set offline := true" clean compile stage
+
+sed -i -e 's/localhost/10.100.161.80/g' target/universal/stage/conf/application.conf
+
+./target/universal/stage/bin/authentication-service -Dplay.evolutions.db.default.autoApply=true -Dhttp.port=9017 -Dplay.crypto.secret='qiqmTTc/azsmpe1T3tfmkkkFw7+yxd5L3L+MXTnI1p8='
