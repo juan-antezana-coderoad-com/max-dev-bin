@@ -27,6 +27,8 @@ docker run -d --name kibana -h kibana \
 -e ELASTICSEARCH_URL=http://${MAX_ELASTIC_SEARCH_HOST}:9200 \
 kibana:4.4
 
+sleep 5s
+
 echo
 echo "### installing sense"
 echo
