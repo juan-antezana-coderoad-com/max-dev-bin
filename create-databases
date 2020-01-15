@@ -1,0 +1,11 @@
+#!/bin/bash
+​
+USER_NAME=${USER_NAME:='root'}
+USER_PASSWORD=${USER_PASSWORD:='control123!'}
+MYSQL_PORT=3306
+​
+# Make sure that the user and password is "root" and "control123!" otherwise you should change it.
+# Make sure the names of the schemas are correct otherwise you should change it.
+​echo 'Creating databases for VEEA'
+mysql --host 127.0.0.1 --port $MYSQL_PORT -u$USER_NAME -p$USER_PASSWORD -e "create schema acl_db; create schema authdb; create schema bootstrap_db; create schema bss_oss_transactions; create schema bss_oss_users; create schema ccenter_db; create schema certificate_db; create schema enrollment_db; create schema ifree_veea; create schema maxdb; create schema maxIntranet; create schema msadb; create schema pocdb; create schema testdb;"
+​echo
