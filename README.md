@@ -7,18 +7,23 @@
 
 
 ## IP RANGE:
-- Mysql               : 10-19
-- Elastic Search      : 20-29
+- Mysql               : 10-14
+- Postgress           : 15-19
+- Elastic Search      : 20-24
+- Kibana              : 25
+- Redis               : 30-34
+- Cassandra           : 50-54  
 - Zookeeper           : 70-79
 - Kafka               : 80-89
+- Services            : 90-100
 
 ## CONTAINERS
 - 172.18.0.10   : Mysql
 - 172.18.0.20   : Elastic Search
-- 172.18.0.30   : Product Order Backend
-- 172.18.0.40   : Party Management Backend
+- 172.18.0.30   : Redis
 - 172.18.0.70   : Zookeeper
 - 172.18.0.80   : Kafka
+- 172.18.0.90   : keycloak
 
 
 ## SETUP

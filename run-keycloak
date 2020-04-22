@@ -1,0 +1,31 @@
+#!/bin/bash -e
+echo
+echo "### removing keycloak"
+
+# delete keycloak if exists
+if ! [[ -z `docker inspect --format="{{ .State.Running }}" keycloak` ]]; then
+  docker rm -f keycloak
+fi
+
+echo
+echo "### running keycloak"
+echo
+
+MAX_NETWORK=${MAX_NETWORK:='max-network'}
+MAX_KEYCLOAK_HOST=${MAX_KEYCLOAK_HOST:='172.18.0.90'}
+echo "MAX_NETWORK: $MAX_NETWORK"
+echo "MAX_KEYCLOAK_HOST: $MAX_KEYCLOAK_HOST"
+echo
+
+docker run -d --name keycloak -h keycloak \
+--network $MAX_NETWORK \
+--ip $MAX_KEYCLOAK_HOST \
+-p 8080:8080 \
+-e DB_VENDOR=MYSQL \
+-e DB_ADDR=mysql-veea \
+-e DB_DATABASE=auth_keycloak \
+-e DB_USER=root \
+-e DB_PASSWORD="control123!" \
+-e KEYCLOAK_USER=admin \
+-e KEYCLOAK_PASSWORD=admin \
+quay.io/keycloak/keycloak:9.0.3
