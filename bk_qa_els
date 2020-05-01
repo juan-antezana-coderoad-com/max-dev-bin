@@ -1,0 +1,95 @@
+#!/bin/bash -e
+
+OAUTHACCESSTOKEN=${OAUTHACCESSTOKEN:='qiriY6h4Tug90J3Fim0pX1LYexg%3D'}
+OAUTHEXPIRES=${OAUTHEXPIRES:='1588364062'}
+
+curl "https://qainternal.veea.co/kibana/api/sense/proxy?uri=http%3A%2F%2F10.2.2.150%3A9200%2Fresources%2F_search%3Fsize%3D10000&_=1588302077161" \
+  -H "Connection: keep-alive" \
+  -H "Accept: text/plain, */*; q=0.01" \
+  -H "kbn-version: 4.5.0" \
+  -H "User-Agent: Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/81.0.4044.129 Safari/537.36" \
+  -H "Sec-Fetch-Site: same-origin" \
+  -H "Sec-Fetch-Mode: cors" \
+  -H "Sec-Fetch-Dest: empty" \
+  -H "Referer: https://qainternal.veea.co/kibana/app/sense" \
+  -H "Accept-Language: en-US,en;q=0.9,es-BO;q=0.8,es;q=0.7" \
+  -H "Cookie: OAuthRedirect=/login; OAuthAccessToken=$OAUTHACCESSTOKEN; OAuthExpires=$OAUTHEXPIRES; OAuthName=juan-antezana-coderoad-com" \
+  --compressed > resources.json
+
+curl "https://qainternal.veea.co/kibana/api/sense/proxy?uri=http%3A%2F%2F10.2.2.150%3A9200%2Fconfigurations%2F_search%3Fsize%3D10000&_=1588302077163" \
+  -H "Connection: keep-alive" \
+  -H "Accept: text/plain, */*; q=0.01" \
+  -H "kbn-version: 4.5.0" \
+  -H "User-Agent: Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/81.0.4044.129 Safari/537.36" \
+  -H "Sec-Fetch-Site: same-origin" \
+  -H "Sec-Fetch-Mode: cors" \
+  -H "Sec-Fetch-Dest: empty" \
+  -H "Referer: https://qainternal.veea.co/kibana/app/sense" \
+  -H "Accept-Language: en-US,en;q=0.9,es-BO;q=0.8,es;q=0.7" \
+  -H "Cookie: OAuthRedirect=/login; OAuthAccessToken=$OAUTHACCESSTOKEN; OAuthExpires=$OAUTHEXPIRES; OAuthName=juan-antezana-coderoad-com" \
+  --compressed > configurations.json
+
+curl "https://qainternal.veea.co/kibana/api/sense/proxy?uri=http%3A%2F%2F10.2.2.150%3A9200%2Fservices%2F_search%3Fsize%3D10000&_=1588302077165" \
+  -H "Connection: keep-alive" \
+  -H "Accept: text/plain, */*; q=0.01" \
+  -H "kbn-version: 4.5.0" \
+  -H "User-Agent: Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/81.0.4044.129 Safari/537.36" \
+  -H "Sec-Fetch-Site: same-origin" \
+  -H "Sec-Fetch-Mode: cors" \
+  -H "Sec-Fetch-Dest: empty" \
+  -H "Referer: https://qainternal.veea.co/kibana/app/sense" \
+  -H "Accept-Language: en-US,en;q=0.9,es-BO;q=0.8,es;q=0.7" \
+  -H "Cookie: OAuthRedirect=/login; OAuthAccessToken=$OAUTHACCESSTOKEN; OAuthExpires=$OAUTHEXPIRES; OAuthName=juan-antezana-coderoad-com" \
+  --compressed > services.json
+
+curl "https://qainternal.veea.co/kibana/api/sense/proxy?uri=http%3A%2F%2F10.2.2.150%3A9200%2Findividuals%2F_search%3Fsize%3D10000&_=1588302077167" \
+  -H "Connection: keep-alive" \
+  -H "Accept: text/plain, */*; q=0.01" \
+  -H "kbn-version: 4.5.0" \
+  -H "User-Agent: Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/81.0.4044.129 Safari/537.36" \
+  -H "Sec-Fetch-Site: same-origin" \
+  -H "Sec-Fetch-Mode: cors" \
+  -H "Sec-Fetch-Dest: empty" \
+  -H "Referer: https://qainternal.veea.co/kibana/app/sense" \
+  -H "Accept-Language: en-US,en;q=0.9,es-BO;q=0.8,es;q=0.7" \
+  -H "Cookie: OAuthRedirect=/login; OAuthAccessToken=$OAUTHACCESSTOKEN; OAuthExpires=$OAUTHEXPIRES; OAuthName=juan-antezana-coderoad-com" \
+  --compressed > individuals.json
+
+curl "https://qainternal.veea.co/kibana/api/sense/proxy?uri=http%3A%2F%2F10.2.2.150%3A9200%2Fsoftware_releases%2F_search%3Fsize%3D10000&_=1588302077168" \
+  -H "Connection: keep-alive" \
+  -H "Accept: text/plain, */*; q=0.01" \
+  -H "kbn-version: 4.5.0" \
+  -H "User-Agent: Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/81.0.4044.129 Safari/537.36" \
+  -H "Sec-Fetch-Site: same-origin" \
+  -H "Sec-Fetch-Mode: cors" \
+  -H "Sec-Fetch-Dest: empty" \
+  -H "Referer: https://qainternal.veea.co/kibana/app/sense" \
+  -H "Accept-Language: en-US,en;q=0.9,es-BO;q=0.8,es;q=0.7" \
+  -H "Cookie: OAuthRedirect=/login; OAuthAccessToken=$OAUTHACCESSTOKEN; OAuthExpires=$OAUTHEXPIRES; OAuthName=juan-antezana-coderoad-com" \
+  --compressed > software_releases.json
+
+curl "https://qainternal.veea.co/kibana/api/sense/proxy?uri=http%3A%2F%2F10.2.2.150%3A9200%2Fscheduler_event%2F_search%3Fsize%3D10000&_=1588302077169" \
+  -H "Connection: keep-alive" \
+  -H "Accept: text/plain, */*; q=0.01" \
+  -H "kbn-version: 4.5.0" \
+  -H "User-Agent: Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/81.0.4044.129 Safari/537.36" \
+  -H "Sec-Fetch-Site: same-origin" \
+  -H "Sec-Fetch-Mode: cors" \
+  -H "Sec-Fetch-Dest: empty" \
+  -H "Referer: https://qainternal.veea.co/kibana/app/sense" \
+  -H "Accept-Language: en-US,en;q=0.9,es-BO;q=0.8,es;q=0.7" \
+  -H "Cookie: OAuthRedirect=/login; OAuthAccessToken=$OAUTHACCESSTOKEN; OAuthExpires=$OAUTHEXPIRES; OAuthName=juan-antezana-coderoad-com" \
+  --compressed > scheduler_event.json
+
+curl "https://qainternal.veea.co/kibana/api/sense/proxy?uri=http%3A%2F%2F10.2.2.150%3A9200%2Fcustomer_subscription%2F_search%3Fsize%3D10000&_=1588302077171" \
+  -H "Connection: keep-alive" \
+  -H "Accept: text/plain, */*; q=0.01" \
+  -H "kbn-version: 4.5.0" \
+  -H "User-Agent: Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/81.0.4044.129 Safari/537.36" \
+  -H "Sec-Fetch-Site: same-origin" \
+  -H "Sec-Fetch-Mode: cors" \
+  -H "Sec-Fetch-Dest: empty" \
+  -H "Referer: https://qainternal.veea.co/kibana/app/sense" \
+  -H "Accept-Language: en-US,en;q=0.9,es-BO;q=0.8,es;q=0.7" \
+  -H "Cookie: OAuthRedirect=/login; OAuthAccessToken=${OAUTHACCESSTOKEN}; OAuthExpires=${OAUTHEXPIRES}; OAuthName=juan-antezana-coderoad-com" \
+  --compressed > customer_subscription.json
