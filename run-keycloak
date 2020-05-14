@@ -28,4 +28,8 @@ docker run -d --name keycloak -h keycloak \
 -e DB_PASSWORD="control123!" \
 -e KEYCLOAK_USER=admin \
 -e KEYCLOAK_PASSWORD=admin \
-quay.io/keycloak/keycloak:9.0.3
+jboss/keycloak
+
+#-v ~/docker-volumes/keycloak-data/dependencies/jbcrypt:/opt/jboss/keycloak/modules/org/mindrot/jbcrypt/main \
+#-v ~/docker-volumes/keycloak-data/deployments:/opt/jboss/keycloak/standalone/deployments \
+
