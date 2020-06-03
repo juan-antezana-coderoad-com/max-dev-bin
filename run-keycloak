@@ -22,7 +22,7 @@ docker run -d --name keycloak -h keycloak \
 --ip $MAX_KEYCLOAK_HOST \
 -p 8080:8080 \
 -e DB_VENDOR=MYSQL \
--e DB_ADDR=mysql-veea \
+-e DB_ADDR=veea-mysql \
 -e DB_DATABASE=auth_keycloak \
 -e DB_USER=root \
 -e DB_PASSWORD="control123!" \

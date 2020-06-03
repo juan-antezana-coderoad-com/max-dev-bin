@@ -1,0 +1,34 @@
+#!/bin/bash -e
+echo
+echo "### removing veea-keycloak"
+
+# delete keycloak if exists
+if ! [[ -z `docker inspect --format="{{ .State.Running }}" veea-keycloak` ]]; then
+  docker rm -f veea-keycloak
+fi
+
+echo
+echo "### running veea-keycloak"
+echo
+
+MAX_NETWORK=${MAX_NETWORK:='max-network'}
+MAX_KEYCLOAK_HOST=${MAX_KEYCLOAK_HOST:='172.18.0.91'}
+echo "MAX_NETWORK: $MAX_NETWORK"
+echo "MAX_KEYCLOAK_HOST: $MAX_KEYCLOAK_HOST"
+echo
+
+docker run -d --name veea-keycloak -h veea-keycloak \
+--network $MAX_NETWORK \
+--ip $MAX_KEYCLOAK_HOST \
+-p 8080:8080 \
+-e DB_VENDOR=MYSQL \
+-e DB_ADDR=veea-mysql \
+-e DB_DATABASE=auth_keycloak \
+-e DB_USER=root \
+-e DB_PASSWORD="control123!" \
+-e KEYCLOAK_USER=admin \
+-e KEYCLOAK_PASSWORD=admin \
+-e PROXY_ADDRESS_FORWARDING=true \
+-e JDBC_PARAMS="useSSL=false" \
+-e WEB_CONTEXT_CONF="" \
+registry.max2.com/veea-keycloak:1.0.0.1.25

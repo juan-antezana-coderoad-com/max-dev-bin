@@ -1,14 +1,14 @@
 #!/bin/bash -e
 echo
-echo "### removing mysql-veea"
+echo "### removing veea-mysql"
 
 # delete mysql if exists
-if ! [[ -z `docker inspect --format="{{ .State.Running }}" mysql-veea` ]]; then
-  docker rm -f mysql-veea
+if ! [[ -z `docker inspect --format="{{ .State.Running }}" veea-mysql` ]]; then
+  docker rm -f veea-mysql
 fi
 
 echo
-echo "### running mysql-veea"
+echo "### running veea-mysql"
 echo
 
 MAX_NETWORK=${MAX_NETWORK:='max-network'}
@@ -17,7 +17,7 @@ echo "MAX_NETWORK: $MAX_NETWORK"
 echo "MAX_MYSQL_VEEA_HOST: $MAX_MYSQL_VEEA_HOST"
 echo
 
-docker run -d --name mysql-veea -h mysql-veea \
+docker run -d --name veea-mysql -h veea-mysql \
 --network $MAX_NETWORK \
 --ip $MAX_MYSQL_VEEA_HOST \
 -p 3306:3306 \
