@@ -1,9 +1,9 @@
 #!/bin/bash
 
 echo
-echo "#######################"
-echo "### Pre -Requisites ###"
-echo "#######################"
+echo "########################"
+echo "### Pre - Requisites ###"
+echo "########################"
 echo
 echo "1. Create a user in keycloak (Realm master) "
 echo "   - username: system"
