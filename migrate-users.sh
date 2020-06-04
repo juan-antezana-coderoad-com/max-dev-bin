@@ -1,15 +1,22 @@
 #!/bin/bash
 
-# Prerequisitos
-# - https://stedolan.github.io/jq/
-
+echo
+echo "#######################"
+echo "### Pre -Requisites ###"
+echo "#######################"
+echo
+echo "1. Create a user in keycloak (Realm master) "
+echo "   - username: system"
+echo "   - password: 5ystm_123!"
+echo "2. Assign the role admin to user system"
+echo "3. Install jq (https://stedolan.github.io/jq/download/)"
 
 echo
 echo "#####################"
 echo "### Configuration ###"
 echo "#####################"
 echo
-BATCH_SIZE=100
+BATCH_SIZE=300
 echo "BATCH_SIZE: $BATCH_SIZE"
 
 echo
@@ -63,6 +70,12 @@ then
   echo "Number Of Users in Auth: ${AUTH_NUMBER_OF_USERS}"
   NUMBERS_OF_BATCHES=$(( AUTH_NUMBER_OF_USERS / BATCH_SIZE ))
   echo "Number Of Batches: ${NUMBERS_OF_BATCHES}"
+
+  echo
+  echo "###############################################################"
+  echo "### Migrating users from Authentication Service to keycloak ###"
+  echo "###############################################################"
+  echo
 
   for BATCH in $(seq 1 $NUMBERS_OF_BATCHES);
   do
