@@ -10,7 +10,7 @@ if [[ $# -ne 2 ]]; then
     exit 2
 fi
 
-#
+# Read the arguments
 AUTH_SERVICE_BASE_URL=$1
 KEYCLOAK_BASE_URL=$2
 
@@ -30,6 +30,7 @@ echo "#####################"
 echo "### Configuration ###"
 echo "#####################"
 echo
+# Default batch size is 300
 BATCH_SIZE=300
 echo "BATCH_SIZE: $BATCH_SIZE"
 
@@ -38,7 +39,6 @@ echo "####################################"
 echo "### Authentication Configuration ###"
 echo "####################################"
 echo
-#AUTH_SERVICE_BASE_URL="http://localhost:9017/as"
 SERVICE_TOKEN_HEADER="X-Scene-Service-Token-Header"
 SERVICE_TOKEN_VALUE="BSS:SERVICE:TOKEN:DEV:001"
 
@@ -51,7 +51,6 @@ echo "##############################"
 echo "### Keycloak Configuration ###"
 echo "##############################"
 echo
-#KEYCLOAK_BASE_URL="http://localhost:8080"
 KEYCLOAK_REALM="veea"
 KEYCLOAK_ALGORITHM="veea-password"
 KEYCLOAK_USER="system"
@@ -77,11 +76,15 @@ AUTH_RESPONSE_GET_LIST_OF_USERS=$(curl --location \
 AUTH_RESPONSE_GET_LIST_OF_USERS=(${AUTH_RESPONSE_GET_LIST_OF_USERS[@]})
 HTTP_STATUS_CODE=${AUTH_RESPONSE_GET_LIST_OF_USERS[-1]}
 
+# Checking if the http status code is 200
 if [[ ${HTTP_STATUS_CODE} -eq 200 ]]
 then
+  # Getting the Body
   BODY=${AUTH_RESPONSE_GET_LIST_OF_USERS[@]::${#AUTH_RESPONSE_GET_LIST_OF_USERS[@]}-1}
+  # Getting the number of users of the body using jq
   AUTH_NUMBER_OF_USERS=$(echo "${BODY}" | jq '.total')
   echo "Number Of Users in Auth: ${AUTH_NUMBER_OF_USERS}"
+  # Calculating the number of batches (number of users / batch size)
   NUMBERS_OF_BATCHES=$(( AUTH_NUMBER_OF_USERS / BATCH_SIZE ))
   echo "Number Of Batches: ${NUMBERS_OF_BATCHES}"
 
@@ -93,6 +96,7 @@ then
 
   for BATCH in $(seq 1 $NUMBERS_OF_BATCHES);
   do
+    # Calling the endpoint POST /userManagement/user/migrate to migrate the users from auth to keycloak
     AUTH_REQUEST_MIGRATE_USERS="${AUTH_SERVICE_BASE_URL}/userManagement/user/migrate?pageSize=$BATCH_SIZE&pageNumber=$BATCH"
     echo "AUTH_REQUEST_MIGRATE_USERS: $AUTH_REQUEST_MIGRATE_USERS"
 
