@@ -1,5 +1,14 @@
 #!/bin/bash
 
+if [[ $# -ne 2 ]]; then
+    echo "Illegal number of parameters"
+    exit 2
+fi
+
+#
+AUTH_BASE_URL=$1
+KEYCLOAK_BASE_URL=$2
+
 echo
 echo "########################"
 echo "### Pre - Requisites ###"
@@ -24,7 +33,7 @@ echo "####################################"
 echo "### Authentication Configuration ###"
 echo "####################################"
 echo
-AUTH_BASE_URL="http://localhost:9017/as"
+#AUTH_BASE_URL="http://localhost:9017/as"
 SERVICE_TOKEN_HEADER="X-Scene-Service-Token-Header"
 SERVICE_TOKEN_VALUE="BSS:SERVICE:TOKEN:DEV:001"
 
@@ -37,7 +46,7 @@ echo "##############################"
 echo "### Keycloak Configuration ###"
 echo "##############################"
 echo
-KEYCLOAK_BASE_URL="http://localhost:8080"
+#KEYCLOAK_BASE_URL="http://localhost:8080"
 KEYCLOAK_REALM="veea"
 KEYCLOAK_ALGORITHM="veea-password"
 KEYCLOAK_USER="system"
