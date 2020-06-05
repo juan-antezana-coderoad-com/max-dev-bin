@@ -2,11 +2,16 @@
 
 if [[ $# -ne 2 ]]; then
     echo "Illegal number of parameters"
+    echo
+    echo "migrate-users.sh [auth_service_base_url] [keycloak_base_url]"
+    echo
+    echo "Example:"
+    echo "migrate-users.sh http://localhost:9017/as http://localhost:8080"
     exit 2
 fi
 
 #
-AUTH_BASE_URL=$1
+AUTH_SERVICE_BASE_URL=$1
 KEYCLOAK_BASE_URL=$2
 
 echo
@@ -33,11 +38,11 @@ echo "####################################"
 echo "### Authentication Configuration ###"
 echo "####################################"
 echo
-#AUTH_BASE_URL="http://localhost:9017/as"
+#AUTH_SERVICE_BASE_URL="http://localhost:9017/as"
 SERVICE_TOKEN_HEADER="X-Scene-Service-Token-Header"
 SERVICE_TOKEN_VALUE="BSS:SERVICE:TOKEN:DEV:001"
 
-echo "AUTH_BASE_URL: $AUTH_BASE_URL"
+echo "AUTH_SERVICE_BASE_URL: $AUTH_SERVICE_BASE_URL"
 echo "SERVICE_TOKEN_HEADER: $SERVICE_TOKEN_HEADER"
 echo "SERVICE_TOKEN_VALUE: $SERVICE_TOKEN_VALUE"
 
@@ -63,7 +68,7 @@ echo "##########################################################"
 echo "### Gets the number of users in Authentication Service ###"
 echo "##########################################################"
 echo
-AUTH_REQUEST_GET_LIST_OF_USERS="${AUTH_BASE_URL}/userManagement/user?pageSize=1"
+AUTH_REQUEST_GET_LIST_OF_USERS="${AUTH_SERVICE_BASE_URL}/userManagement/user?pageSize=1"
 AUTH_RESPONSE_GET_LIST_OF_USERS=$(curl --location \
                                        --request GET "${AUTH_REQUEST_GET_LIST_OF_USERS}" \
                                        --header "${SERVICE_TOKEN_HEADER}: ${SERVICE_TOKEN_VALUE}" \
@@ -88,7 +93,7 @@ then
 
   for BATCH in $(seq 1 $NUMBERS_OF_BATCHES);
   do
-    AUTH_REQUEST_MIGRATE_USERS="${AUTH_BASE_URL}/userManagement/user/migrate?pageSize=$BATCH_SIZE&pageNumber=$BATCH"
+    AUTH_REQUEST_MIGRATE_USERS="${AUTH_SERVICE_BASE_URL}/userManagement/user/migrate?pageSize=$BATCH_SIZE&pageNumber=$BATCH"
     echo "AUTH_REQUEST_MIGRATE_USERS: $AUTH_REQUEST_MIGRATE_USERS"
 
     curl --location \
