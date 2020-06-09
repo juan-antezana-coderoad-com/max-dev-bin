@@ -84,8 +84,8 @@ then
   # Getting the number of users of the body using jq
   AUTH_NUMBER_OF_USERS=$(echo "${BODY}" | jq '.total')
   echo "Number Of Users in Auth: ${AUTH_NUMBER_OF_USERS}"
-  # Calculating the number of batches (number of users / batch size)
-  NUMBERS_OF_BATCHES=$(( AUTH_NUMBER_OF_USERS / BATCH_SIZE ))
+  # Calculating the number of batches (number of users / batch size) + (number of users % batch size > 0)
+  NUMBERS_OF_BATCHES=$(( (AUTH_NUMBER_OF_USERS / BATCH_SIZE) + (AUTH_NUMBER_OF_USERS % BATCH_SIZE > 0) ))
   echo "Number Of Batches: ${NUMBERS_OF_BATCHES}"
 
   echo
