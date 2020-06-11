@@ -31,4 +31,4 @@ docker run -d --name veea-keycloak -h veea-keycloak \
 -e PROXY_ADDRESS_FORWARDING=true \
 -e JDBC_PARAMS="useSSL=false" \
 -e WEB_CONTEXT_CONF="" \
-registry.max2.com/veea-keycloak:1.0.0.1.28
+registry.max2.com/veea-keycloak
