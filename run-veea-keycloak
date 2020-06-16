@@ -8,6 +8,10 @@ if ! [[ -z `docker inspect --format="{{ .State.Running }}" veea-keycloak` ]]; th
 fi
 
 echo
+echo "### pulling veea-keycloak"
+docker pull registry.max2.com/veea-keycloak:latest
+
+echo
 echo "### running veea-keycloak"
 echo
 
