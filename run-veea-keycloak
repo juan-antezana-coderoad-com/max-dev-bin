@@ -35,4 +35,6 @@ docker run -d --name veea-keycloak -h veea-keycloak \
 -e PROXY_ADDRESS_FORWARDING=true \
 -e JDBC_PARAMS="useSSL=false" \
 -e WEB_CONTEXT_CONF="" \
+-e JGROUPS_DISCOVERY_PROTOCOL="JDBC_PING" \
+-e JGROUPS_DISCOVERY_PROPERTIES="datasource_jndi_name=java:jboss/datasources/KeycloakDS" \
 registry.max2.com/veea-keycloak:latest
