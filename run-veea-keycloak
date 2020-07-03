@@ -37,4 +37,5 @@ docker run -d --name veea-keycloak -h veea-keycloak \
 -e WEB_CONTEXT_CONF="" \
 -e JGROUPS_DISCOVERY_PROTOCOL="JDBC_PING" \
 -e JGROUPS_DISCOVERY_PROPERTIES="datasource_jndi_name=java:jboss/datasources/KeycloakDS" \
+-e JAVA_TOOL_OPTIONS="-Dkeycloak.profile.feature.admin_fine_grained_authz=enabled -Dkeycloak.profile.feature.token_exchange=enabled" \
 registry.max2.com/veea-keycloak:latest
