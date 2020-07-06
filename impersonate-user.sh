@@ -85,6 +85,3 @@ then
 else
   echo "Mistakes getting the token for suppor user"
 fi
-
-
-
