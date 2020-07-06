@@ -33,14 +33,13 @@ USER_ACCESS_TOKEN=$(echo "${USER_TOKEN_RESPONSE}" | jq -r '.access_token')
 # Checking if the http status code is 200
 if [[ "${USER_ACCESS_TOKEN}" != "null" ]]
 then
-  # echo
-  # echo "Your access token is: $USER_ACCESS_TOKEN"
+  echo "Your access token is: ${USER_ACCESS_TOKEN}"
   echo
   echo "####################################"
   echo "### Exchanging token on Keycloak ###"
   echo "####################################"
   echo
-  echo "Getting the access token for $IMPERSONATED_USER_EMAIL"
+  echo "Getting the access token for ${KEYCLOAK_IMPERSONATED_USER_EMAIL}"
   echo "KEYCLOAK_REQUEST_GET_TOKEN: $KEYCLOAK_REQUEST_GET_TOKEN"
   IMPERSONATED_USER_TOKEN_RESPONSE=$(curl -s \
                                           --request POST "${KEYCLOAK_REQUEST_GET_TOKEN}" \

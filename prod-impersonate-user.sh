@@ -39,7 +39,7 @@ then
   echo "### Exchanging token on Keycloak ###"
   echo "####################################"
   echo
-  echo "Getting the acces token for ${KEYCLOAK_IMPERSONATED_USER_EMAIL}"
+  echo "Getting the access token for ${KEYCLOAK_IMPERSONATED_USER_EMAIL}"
   echo "KEYCLOAK_REQUEST_GET_TOKEN: $KEYCLOAK_REQUEST_GET_TOKEN"
   IMPERSONATED_USER_TOKEN_RESPONSE=$(curl -s \
                                           --request POST "${KEYCLOAK_REQUEST_GET_TOKEN}" \
