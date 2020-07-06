@@ -53,8 +53,8 @@ HTTP_STATUS_CODE=${KEYCLOAK_RESPONSE_SUPPORT_GET_TOKEN[-1]}
 if [[ ${HTTP_STATUS_CODE} -eq 200 ]]
 then
   BODY=${KEYCLOAK_RESPONSE_SUPPORT_GET_TOKEN[@]::${#KEYCLOAK_RESPONSE_SUPPORT_GET_TOKEN[@]}-1}
-  SUPPORT_ACCESS_TOKEN=$(echo "${BODY}" | jq '.access_token')
-  echo "SUPPORT_ACCESS_TOKEN: $SUPPORT_ACCESS_TOKEN"
+  SUPPORT_ACCESS_TOKEN=$(echo "${BODY}" | jq -r '.access_token')
+  echo "SUPPORT_ACCESS_TOKEN: ${SUPPORT_ACCESS_TOKEN}"
 
   echo
   echo "####################################"
@@ -71,14 +71,13 @@ then
                                                        --data-urlencode "requested_subject=${KEYCLOAK_IMPERSONATED_USER_EMAIL}" \
                                                        --data-urlencode "subject_token=${SUPPORT_ACCESS_TOKEN}" \
                                                        -w "\n%{http_code}")
-  echo "KEYCLOAK_RESPONSE_IMPERSONATED_USER_GET_TOKEN: ${KEYCLOAK_RESPONSE_IMPERSONATED_USER_GET_TOKEN}"
   KEYCLOAK_RESPONSE_IMPERSONATED_USER_GET_TOKEN=(${KEYCLOAK_RESPONSE_IMPERSONATED_USER_GET_TOKEN[@]})
   HTTP_STATUS_CODE=${KEYCLOAK_RESPONSE_IMPERSONATED_USER_GET_TOKEN[-1]}
 
   if [[ ${HTTP_STATUS_CODE} -eq 200 ]]
   then
     BODY=${KEYCLOAK_RESPONSE_IMPERSONATED_USER_GET_TOKEN[@]::${#KEYCLOAK_RESPONSE_IMPERSONATED_USER_GET_TOKEN[@]}-1}
-    IMPERSONATED_USER_ACCESS_TOKEN=$(echo "${BODY}" | jq '.access_token')
+    IMPERSONATED_USER_ACCESS_TOKEN=$(echo "${BODY}" | jq -r '.access_token')
     echo "IMPERSONATED_USER_ACCESS_TOKEN: ${IMPERSONATED_USER_ACCESS_TOKEN}"
   else
     echo "Mistakes exchanging token for ${KEYCLOAK_IMPERSONATED_USER_EMAIL}"
