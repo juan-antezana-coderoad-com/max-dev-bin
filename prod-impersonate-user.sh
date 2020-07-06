@@ -2,18 +2,17 @@
 if [[ $# -ne 3 ]]; then
     echo "Illegal number of parameters"
     echo
-    echo "impersonate-user.sh [keycloak base url] [your username] [your password] [impersonated user email]"
+    echo "impersonate-user.sh [your username] [your password] [impersonated user email]"
     echo
     echo "Example:"
-    echo "impersonate-user.sh https://auth.veea.co support.user@veea.com verysecretuserpassword impersonated.user@omnicorp.com"
+    echo "impersonate-user.sh support.user@veea.com verysecretuserpassword impersonated.user@omnicorp.com"
     exit 2
 fi
 # Read the arguments
-KEYCLOAK_BASE_URL=$1
-USERNAME=$2
-PASSWORD=$3
-IMPERSONATED_USER_EMAIL=$4
-
+USERNAME=$1
+PASSWORD=$2
+IMPERSONATED_USER_EMAIL=$3
+KEYCLOAK_BASE_URL="https://auth.veea.co"
 KEYCLOAK_REALM="veea"
 KEYCLOAK_CLIENT="veeahub-cli"
 echo

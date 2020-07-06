@@ -2,18 +2,17 @@
 if [[ $# -ne 3 ]]; then
     echo "Illegal number of parameters"
     echo
-    echo "impersonate-user.sh [keycloak base url] [your username] [your password] [impersonated user email]"
+    echo "impersonate-user.sh [your username] [your password] [impersonated user email]"
     echo
     echo "Example:"
-    echo "impersonate-user.sh https://auth.veea.co support.user@veea.com verysecretuserpassword impersonated.user@omnicorp.com"
+    echo "impersonate-user.sh support.user@veea.com verysecretuserpassword impersonated.user@omnicorp.com"
     exit 2
 fi
 # Read the arguments
-KEYCLOAK_BASE_URL=$1
-USERNAME=$2
-PASSWORD=$3
-IMPERSONATED_USER_EMAIL=$4
-
+USERNAME=$1
+PASSWORD=$2
+IMPERSONATED_USER_EMAIL=$3
+KEYCLOAK_BASE_URL="https://auth.dev.veeaplatform.net"
 KEYCLOAK_REALM="veea"
 KEYCLOAK_CLIENT="veeahub-cli"
 echo
@@ -34,13 +33,14 @@ USER_ACCESS_TOKEN=$(echo "${USER_TOKEN_RESPONSE}" | jq -r '.access_token')
 # Checking if the http status code is 200
 if [[ "${USER_ACCESS_TOKEN}" != "null" ]]
 then
-  echo "Your access token is: ${USER_ACCESS_TOKEN}"
+  # echo
+  # echo "Your access token is: $USER_ACCESS_TOKEN"
   echo
   echo "####################################"
   echo "### Exchanging token on Keycloak ###"
   echo "####################################"
   echo
-  echo "Getting the acces token for ${KEYCLOAK_IMPERSONATED_USER_EMAIL}"
+  echo "Getting the access token for $IMPERSONATED_USER_EMAIL"
   echo "KEYCLOAK_REQUEST_GET_TOKEN: $KEYCLOAK_REQUEST_GET_TOKEN"
   IMPERSONATED_USER_TOKEN_RESPONSE=$(curl -s \
                                           --request POST "${KEYCLOAK_REQUEST_GET_TOKEN}" \
