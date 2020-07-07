@@ -31,30 +31,47 @@ USER_TOKEN_RESPONSE=$(curl -s \
                            --data-urlencode 'grant_type=password' \
                            --data-urlencode "client_id=${KEYCLOAK_CLIENT}")
 USER_ACCESS_TOKEN=$(echo "${USER_TOKEN_RESPONSE}" | jq -r '.access_token')
-# Checking if the http status code is 200
 if [[ "${USER_ACCESS_TOKEN}" != "null" ]]
 then
   echo "Your access token is: ${USER_ACCESS_TOKEN}"
+
   echo
   echo "####################################"
-  echo "### Exchanging token on Keycloak ###"
+  echo "### Getting the user id by email ###"
   echo "####################################"
   echo
-  echo "Getting the access token for ${KEYCLOAK_IMPERSONATED_USER_EMAIL}"
-  echo "KEYCLOAK_REQUEST_GET_TOKEN: $KEYCLOAK_REQUEST_GET_TOKEN"
-  IMPERSONATED_USER_TOKEN_RESPONSE=$(curl -s \
-                                          --request POST "${KEYCLOAK_REQUEST_GET_TOKEN}" \
-                                          --header 'Content-Type: application/x-www-form-urlencoded' \
-                                          --data-urlencode "client_id=${KEYCLOAK_CLIENT}" \
-                                          --data-urlencode 'grant_type=urn:ietf:params:oauth:grant-type:token-exchange' \
-                                          --data-urlencode "requested_subject=${IMPERSONATED_USER_EMAIL}" \
-                                          --data-urlencode "subject_token=${USER_ACCESS_TOKEN}")
-  IMPERSONATED_USER_ACCESS_TOKEN=$(echo "${IMPERSONATED_USER_TOKEN_RESPONSE}" | jq -r '.access_token')
-  if [[ "${IMPERSONATED_USER_ACCESS_TOKEN}" != "null" ]]
+  KEYCLOAK_REQUEST_GET_USER_BY_EMAIL="${KEYCLOAK_BASE_URL}/auth/admin/realms/${KEYCLOAK_REALM}/users?email=${IMPERSONATED_USER_EMAIL}"
+  GET_USER_BY_EMAIL_RESPONSE=$(curl -s \
+                                    --request GET "${KEYCLOAK_REQUEST_GET_USER_BY_EMAIL}" \
+                                    --header "Authorization: Bearer ${USER_ACCESS_TOKEN}")
+  USER_ID=$(echo "${GET_USER_BY_EMAIL_RESPONSE}" | jq -r '.[0].id')
+  if [[ "${USER_ID}" != "null" ]]
   then
-    echo "IMPERSONATED_USER_ACCESS_TOKEN: ${IMPERSONATED_USER_ACCESS_TOKEN}"
+    echo "The user id for ${IMPERSONATED_USER_EMAIL} is: ${USER_ID}"
+    echo
+    echo "####################################"
+    echo "### Exchanging token on Keycloak ###"
+    echo "####################################"
+    echo
+    echo "Getting the access token for ${IMPERSONATED_USER_EMAIL}"
+    echo "KEYCLOAK_REQUEST_GET_TOKEN: ${KEYCLOAK_REQUEST_GET_TOKEN}"
+    echo
+    IMPERSONATED_USER_TOKEN_RESPONSE=$(curl -s \
+                                            --request POST "${KEYCLOAK_REQUEST_GET_TOKEN}" \
+                                            --header 'Content-Type: application/x-www-form-urlencoded' \
+                                            --data-urlencode "client_id=${KEYCLOAK_CLIENT}" \
+                                            --data-urlencode 'grant_type=urn:ietf:params:oauth:grant-type:token-exchange' \
+                                            --data-urlencode "requested_subject=${USER_ID}" \
+                                            --data-urlencode "subject_token=${USER_ACCESS_TOKEN}")
+    IMPERSONATED_USER_ACCESS_TOKEN=$(echo "${IMPERSONATED_USER_TOKEN_RESPONSE}" | jq -r '.access_token')
+    if [[ "${IMPERSONATED_USER_ACCESS_TOKEN}" != "null" ]]
+    then
+      echo "IMPERSONATED_USER_ACCESS_TOKEN: ${IMPERSONATED_USER_ACCESS_TOKEN}"
+    else
+      echo "There was an error getting impersonated user token for user: ${IMPERSONATED_USER_EMAIL}, token response: ${IMPERSONATED_USER_TOKEN_RESPONSE}"
+    fi
   else
-    echo "There was an error getting impersonated user token for user: ${IMPERSONATED_USER_EMAIL}, token response ${IMPERSONATED_USER_TOKEN_RESPONSE}"
+    echo "There was an error getting impersonated user id for user: ${IMPERSONATED_USER_EMAIL}, token response: ${GET_USER_BY_EMAIL_RESPONSE}"
   fi
 else
   echo "There was an error getting the token for your user: ${USERNAME}, token response: ${USER_TOKEN_RESPONSE}"
