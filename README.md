@@ -14,7 +14,8 @@
 - Redis               : 30-34
 - Cassandra           : 50-54  
 - Zookeeper           : 70-79
-- Kafka               : 80-89
+- Kafka               : 80-84
+- AWS Kinesis         : 85-89
 - Services            : 90-100
 
 ## CONTAINERS

@@ -1,0 +1,24 @@
+#!/bin/bash -e
+echo
+echo "### removing aws-kinesis"
+
+# delete mysql if exists
+if ! [[ -z `docker inspect --format="{{ .State.Running }}" aws-kinesis` ]]; then
+  docker rm -f aws-kinesis
+fi
+
+echo
+echo "### running aws-kinesis"
+echo
+
+VEEA_NETWORK=${VEEA_NETWORK:='max-network'}
+VEEA_AWS_KINESIS_HOST=${VEEA_AWS_KINESIS_HOST:='172.18.0.85'}
+echo "VEEA_NETWORK: $VEEA_NETWORK"
+echo "VEEA_AWS_KINESIS_HOST: $VEEA_AWS_KINESIS_HOST"
+echo
+
+docker run -d --name aws-kinesis -h aws-kinesis \
+--network $VEEA_NETWORK \
+--ip $VEEA_AWS_KINESIS_HOST \
+-p 4567:4567 \
+saidsef/aws-kinesis-local
