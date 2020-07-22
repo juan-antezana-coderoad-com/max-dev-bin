@@ -27,7 +27,7 @@ docker run -d --name veea-mysql -h veea-mysql \
 -e MYSQL_PASSWORD=play \
 -v ~/docker-volumes/mysql-data-veea:/var/lib/mysql \
 -v ~/docker-volumes/mysql-tmp-veea:/tmp/mysql \
-mysql:5.6.44 \
+mysql:5.7.26 \
 --max_allowed_packet=1024M \
 --max_connections=1500 \
 --query_cache_size=0 \
