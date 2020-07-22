@@ -25,4 +25,4 @@ echo "-----------------"
 echo " List all topics "
 echo "-----------------"
 echo
-$KAFKA_HOME/bin/kafka-topics.sh --list --zookeeper $ZOOKEEPER
+docker exec kafka /opt/kafka_2.11-0.8.2.1/bin/kafka-topics.sh --list --zookeeper $ZOOKEEPER
