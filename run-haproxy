@@ -1,0 +1,23 @@
+#!/bin/bash -e
+echo
+echo "### removing haproxy"
+
+# delete keycloak if exists
+if ! [[ -z `docker inspect --format="{{ .State.Running }}" haproxy` ]]; then
+  docker rm -f haproxy
+fi
+
+echo
+echo "### running haproxy"
+echo
+
+MAX_NETWORK=${MAX_NETWORK:='max-network'}
+MAX_KEYCLOAK_HOST=${MAX_KEYCLOAK_HOST:='172.18.0.95'}
+echo "MAX_NETWORK: $MAX_NETWORK"
+echo "MAX_KEYCLOAK_HOST: $MAX_KEYCLOAK_HOST"
+echo
+
+docker run -d --name haproxy -h haproxy \
+--network $MAX_NETWORK \
+--ip $MAX_KEYCLOAK_HOST \
+haproxy

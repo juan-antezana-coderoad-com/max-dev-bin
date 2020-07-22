@@ -16,6 +16,8 @@
 - Zookeeper           : 70-79
 - Kafka               : 80-84
 - AWS Kinesis         : 85-89
+- Keycloak            : 90-91
+- HA proxy            : 95
 - Services            : 90-100
 
 ## CONTAINERS
