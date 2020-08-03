@@ -23,13 +23,10 @@ docker run -d --name keycloak -h keycloak \
 -p 8080:8080 \
 -e DB_VENDOR=MYSQL \
 -e DB_ADDR=veea-mysql \
--e DB_DATABASE=auth_keycloak \
+-e DB_DATABASE=keycloak \
 -e DB_USER=root \
 -e DB_PASSWORD="control123!" \
 -e KEYCLOAK_USER=admin \
 -e KEYCLOAK_PASSWORD=admin \
+-e JAVA_TOOL_OPTIONS="-Dkeycloak.profile.feature.token_exchange=enabled -Dkeycloak.profile.feature.scripts=enabled" \
 quay.io/keycloak/keycloak
-
-#-v ~/docker-volumes/keycloak-data/dependencies/jbcrypt:/opt/jboss/keycloak/modules/org/mindrot/jbcrypt/main \
-#-v ~/docker-volumes/keycloak-data/deployments:/opt/jboss/keycloak/standalone/deployments \
-
