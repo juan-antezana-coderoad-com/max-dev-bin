@@ -1,0 +1,6 @@
+#!/bin/bash -e
+
+export KEYCLOAK_HOME=/opt/jboss/keycloak
+export KEYCLOAK_DEPLOYMENTS=/opt/jboss/keycloak/standalone/deployments
+
+docker cp $MAX_SRC_HOME/group-mgmt/keycloak-js-policies/target/keycloak-js-policies-1.0.0.jar keycloak:${KEYCLOAK_DEPLOYMENTS}
