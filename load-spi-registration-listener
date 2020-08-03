@@ -1,0 +1,8 @@
+#!/bin/bash -e
+
+export KEYCLOAK_HOME=/opt/jboss/keycloak
+export KEYCLOAK_DEPLOYMENTS=/opt/jboss/keycloak/standalone/deployments
+
+docker cp $MAX_SRC_HOME/max-dev-bin/keycloak/global-modules.cli keycloak:$KEYCLOAK_HOME
+docker exec -ti keycloak $KEYCLOAK_HOME/bin/jboss-cli.sh --connect --file=$KEYCLOAK_HOME/global-modules.cli
+docker cp $MAX_SRC_HOME/veea-spi-registration-listener/target/veea-spi-registration-listener-1.0.2.jar keycloak:${KEYCLOAK_DEPLOYMENTS}

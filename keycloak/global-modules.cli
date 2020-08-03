@@ -1,0 +1,3 @@
+/subsystem=ee:list-add(name=global-modules,value={name=org.keycloak.keycloak-model-jpa})
+/subsystem=ee:list-add(name=global-modules,value={name=org.hibernate})
+/subsystem=ee:list-add(name=global-modules,value={name=org.keycloak.keycloak-services})
