@@ -68,21 +68,16 @@ echo "### Gets the number of users in Authentication Service ###"
 echo "##########################################################"
 echo
 AUTH_REQUEST_GET_LIST_OF_USERS="${AUTH_SERVICE_BASE_URL}/userManagement/user?pageSize=1"
-AUTH_RESPONSE_GET_LIST_OF_USERS=$(curl --location \
+AUTH_RESPONSE_GET_LIST_OF_USERS=$(curl --silent \
                                        --request GET "${AUTH_REQUEST_GET_LIST_OF_USERS}" \
-                                       --header "${SERVICE_TOKEN_HEADER}: ${SERVICE_TOKEN_VALUE}" \
-                                       -w "\n%{http_code}")
+                                       --header "${SERVICE_TOKEN_HEADER}: ${SERVICE_TOKEN_VALUE}")
 
-AUTH_RESPONSE_GET_LIST_OF_USERS=(${AUTH_RESPONSE_GET_LIST_OF_USERS[@]})
-HTTP_STATUS_CODE=${AUTH_RESPONSE_GET_LIST_OF_USERS[-1]}
-
-# Checking if the http status code is 200
-if [[ ${HTTP_STATUS_CODE} -eq 200 ]]
+if [[ "$AUTH_RESPONSE_GET_LIST_OF_USERS" == "null" ]]
 then
-  # Getting the Body
-  BODY=${AUTH_RESPONSE_GET_LIST_OF_USERS[@]::${#AUTH_RESPONSE_GET_LIST_OF_USERS[@]}-1}
-  # Getting the number of users of the body using jq
-  AUTH_NUMBER_OF_USERS=$(echo "${BODY}" | jq '.total')
+   echo "Mistakes getting the list of users in Authentication Service"
+else
+   # Getting the number of users of the body using jq
+  AUTH_NUMBER_OF_USERS=$(echo "${AUTH_RESPONSE_GET_LIST_OF_USERS}" | jq '.total')
   echo "Number Of Users in Auth: ${AUTH_NUMBER_OF_USERS}"
   # Calculating the number of batches (number of users / batch size) + (number of users % batch size > 0)
   NUMBERS_OF_BATCHES=$(( (AUTH_NUMBER_OF_USERS / BATCH_SIZE) + (AUTH_NUMBER_OF_USERS % BATCH_SIZE > 0) ))
@@ -117,6 +112,4 @@ then
 
     echo
   done
-else
-  echo "Mistakes getting the list of users in Authentication Service"
 fi

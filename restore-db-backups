@@ -3,48 +3,51 @@
 BACKUP_HOME=${BACKUP_HOME:='/home/jantezana/Mojix/Veea/Backups/mysql-data/restore_backup'}
 USER_NAME=${USER_NAME:='root'}
 USER_PASSWORD=${USER_PASSWORD:='control123!'}
-#USER_PASSWORD='admin'
 MYSQL_PORT=3306
 
+echo "BACKUP_HOME: $BACKUP_HOME"
+echo "USER_NAME: $USER_NAME"
+echo "USER_PASSWORD: $USER_PASSWORD"
+
 echo "start restore acl_db"
-mysql --host 127.0.0.1 --port $MYSQL_PORT -u$USER_NAME -p$USER_PASSWORD acl_db < $BACKUP_HOME/acl_db/MySQL.sql
+docker exec -i veea-mysql mysql --host 127.0.0.1 --port $MYSQL_PORT -u$USER_NAME -p$USER_PASSWORD acl_db < $BACKUP_HOME/acl_db/MySQL.sql
 echo "end restore"
 echo "start restore authdb"
-mysql --host 127.0.0.1 --port $MYSQL_PORT -u$USER_NAME -p$USER_PASSWORD authdb < $BACKUP_HOME/authdb/MySQL.sql
+docker exec -i veea-mysql mysql --host 127.0.0.1 --port $MYSQL_PORT -u$USER_NAME -p$USER_PASSWORD authdb < $BACKUP_HOME/authdb/MySQL.sql
 echo "end restore"
 echo "start restore bootstrap_db"
-mysql --host 127.0.0.1 --port $MYSQL_PORT -u$USER_NAME -p$USER_PASSWORD bootstrap_db < $BACKUP_HOME/bootstrap_db/MySQL.sql
+docker exec -i veea-mysql mysql --host 127.0.0.1 --port $MYSQL_PORT -u$USER_NAME -p$USER_PASSWORD bootstrap_db < $BACKUP_HOME/bootstrap_db/MySQL.sql
 echo "end restore"
 echo "start restore bss_oss_transactions"
-mysql --host 127.0.0.1 --port $MYSQL_PORT -u$USER_NAME -p$USER_PASSWORD bss_oss_transactions < $BACKUP_HOME/bss_oss_transactions/MySQL.sql
+docker exec -i veea-mysql mysql --host 127.0.0.1 --port $MYSQL_PORT -u$USER_NAME -p$USER_PASSWORD bss_oss_transactions < $BACKUP_HOME/bss_oss_transactions/MySQL.sql
 echo "end restore"
 echo "start restore bss_oss_users"
-mysql --host 127.0.0.1 --port $MYSQL_PORT -u$USER_NAME -p$USER_PASSWORD bss_oss_users < $BACKUP_HOME/bss_oss_users/MySQL.sql
+docker exec -i veea-mysql mysql --host 127.0.0.1 --port $MYSQL_PORT -u$USER_NAME -p$USER_PASSWORD bss_oss_users < $BACKUP_HOME/bss_oss_users/MySQL.sql
 echo "end restore"
 echo "start restore ccenter_db"
-mysql --host 127.0.0.1 --port $MYSQL_PORT -u$USER_NAME -p$USER_PASSWORD ccenter_db < $BACKUP_HOME/ccenter_db/MySQL.sql
+docker exec -i veea-mysql mysql --host 127.0.0.1 --port $MYSQL_PORT -u$USER_NAME -p$USER_PASSWORD ccenter_db < $BACKUP_HOME/ccenter_db/MySQL.sql
 echo "end restore"
 echo "start restore certificate_db"
-mysql --host 127.0.0.1 --port $MYSQL_PORT -u$USER_NAME -p$USER_PASSWORD certificate_db < $BACKUP_HOME/certificate_db/MySQL.sql
+docker exec -i veea-mysql mysql --host 127.0.0.1 --port $MYSQL_PORT -u$USER_NAME -p$USER_PASSWORD certificate_db < $BACKUP_HOME/certificate_db/MySQL.sql
 echo "end restore"
 echo "start restore enrollment_db"
-mysql --host 127.0.0.1 --port $MYSQL_PORT -u$USER_NAME -p$USER_PASSWORD enrollment_db < $BACKUP_HOME/enrollment_db/MySQL.sql
+docker exec -i veea-mysql mysql --host 127.0.0.1 --port $MYSQL_PORT -u$USER_NAME -p$USER_PASSWORD enrollment_db < $BACKUP_HOME/enrollment_db/MySQL.sql
 echo "end restore"
 echo "start restore ifree_veea"
-mysql --host 127.0.0.1 --port $MYSQL_PORT -u$USER_NAME -p$USER_PASSWORD ifree_veea < $BACKUP_HOME/ifree_veea/MySQL.sql
+docker exec -i veea-mysql mysql --host 127.0.0.1 --port $MYSQL_PORT -u$USER_NAME -p$USER_PASSWORD ifree_veea < $BACKUP_HOME/ifree_veea/MySQL.sql
 echo "end restore"
 echo "start restore maxdb"
-mysql --host 127.0.0.1 --port $MYSQL_PORT -u$USER_NAME -p$USER_PASSWORD maxdb < $BACKUP_HOME/maxdb/MySQL.sql
+docker exec -i veea-mysql mysql --host 127.0.0.1 --port $MYSQL_PORT -u$USER_NAME -p$USER_PASSWORD maxdb < $BACKUP_HOME/maxdb/MySQL.sql
 echo "end restore"
 echo "start restore maxIntranet"
-mysql --host 127.0.0.1 --port $MYSQL_PORT -u$USER_NAME -p$USER_PASSWORD maxIntranet < $BACKUP_HOME/maxintranet/MySQL.sql
+docker exec -i veea-mysql mysql --host 127.0.0.1 --port $MYSQL_PORT -u$USER_NAME -p$USER_PASSWORD maxIntranet < $BACKUP_HOME/maxintranet/MySQL.sql
 echo "end restore"
 echo "start restore msadb"
-mysql --host 127.0.0.1 --port $MYSQL_PORT -u$USER_NAME -p$USER_PASSWORD msadb < $BACKUP_HOME/msa/MySQL.sql
+docker exec -i veea-mysql mysql --host 127.0.0.1 --port $MYSQL_PORT -u$USER_NAME -p$USER_PASSWORD msadb < $BACKUP_HOME/msa/MySQL.sql
 echo "end restore"
 echo "start restore pocdb"
-mysql --host 127.0.0.1 --port $MYSQL_PORT -u$USER_NAME -p$USER_PASSWORD pocdb < $BACKUP_HOME/pocdb/MySQL.sql
+docker exec -i veea-mysql mysql --host 127.0.0.1 --port $MYSQL_PORT -u$USER_NAME -p$USER_PASSWORD pocdb < $BACKUP_HOME/pocdb/MySQL.sql
 echo "end restore"
 echo "start restore testdb"
-mysql --host 127.0.0.1 --port $MYSQL_PORT -u$USER_NAME -p$USER_PASSWORD testdb < $BACKUP_HOME/testdb/MySQL.sql
+docker exec -i veea-mysql mysql --host 127.0.0.1 --port $MYSQL_PORT -u$USER_NAME -p$USER_PASSWORD testdb < $BACKUP_HOME/testdb/MySQL.sql
 echo "end restore"
