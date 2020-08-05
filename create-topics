@@ -19,6 +19,12 @@ create_topic organizationCreationNotification 3
 create_topic enrollment-device-status 3
 create_topic enrollmentActionNotification 3
 create_topic Notification 3
+create_topic BOSSTransactionLog 3
+create_topic transactionTopic 3
+create_topic billingEvent 3
+create_topic BOSSCitconTransactionLog 3
+create_topic eventManagementTopic 3
+create_topic organizationUpdate 3
 
 echo
 echo "-----------------"
