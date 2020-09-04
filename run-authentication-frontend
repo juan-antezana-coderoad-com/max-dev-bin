@@ -1,0 +1,17 @@
+#!/bin/bash
+
+echo "Compiling authentication frontend"
+cd $MAX_SRC_HOME/authentication-frontend
+yarn
+
+echo "Installing dependencies in the server"
+cd $MAX_SRC_HOME/authentication-frontend/server
+yarn install
+
+echo "Installing dependencies in the client"
+cd $MAX_SRC_HOME/authentication-frontend/client
+yarn install
+
+echo "Initializing authentication frontend"
+cd $MAX_SRC_HOME/authentication-frontend
+yarn start
