@@ -1,0 +1,12 @@
+#!/bin/bash
+
+echo "### Compiling bss billing service ###"
+cd $MAX_SRC_HOME/bss-billing-service
+pwd
+git stash
+git pull
+git stash pop
+sbt clean compile
+
+echo "## Starting bss billing service ##"
+sbt clean compile run -Dhttp.port=9026

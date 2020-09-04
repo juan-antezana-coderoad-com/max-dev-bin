@@ -1,17 +1,18 @@
 #!/bin/bash
 
-echo "Compiling product order frontend"
+echo "### Compiling product order frontend ###"
 cd $MAX_SRC_HOME/product-order-frontend
+pwd
 yarn
 
-echo "Installing dependencies in the server"
+echo "### Installing dependencies in the server ###"
 cd $MAX_SRC_HOME/product-order-frontend/server
 yarn install
 
-echo "Installing dependencies in the client"
+echo "### Installing dependencies in the client ###"
 cd $MAX_SRC_HOME/product-order-frontend/client
 yarn install
 
-echo "Initializing authentication frontend"
+echo "## Initializing authentication frontend ##"
 cd $MAX_SRC_HOME/product-order-frontend
 yarn start

@@ -1,0 +1,12 @@
+#!/bin/bash
+
+echo "### Compiling transaction service ###"
+cd $MAX_SRC_HOME/transaction-service
+pwd
+git stash
+git pull
+git stash pop
+sbt clean compile
+
+echo "## Starting transaction service ##"
+sbt clean compile run -Dhttp.port=9016

@@ -1,0 +1,12 @@
+#!/bin/bash
+
+echo "### Compiling authentication service ###"
+cd $MAX_SRC_HOME/authentication-service
+pwd
+git stash
+git pull
+git stash pop
+sbt clean compile
+
+echo "## Starting authentication service ##"
+sbt clean compile run -Dhttp.port=9017

@@ -1,25 +1,12 @@
-#!/bin/bash -e
-echo
-echo "### removing party management backend"
-echo
+#!/bin/bash
 
-# delete services if exists
-if ! [[ -z `docker inspect --format="{{ .State.Running }}" partymanagementbackend` ]]; then
-  docker rm -f partymanagementbackend
-fi
+echo "### Compiling party management backend ###"
+cd $MAX_SRC_HOME/party-management-backend
+pwd
+git stash
+git pull
+git stash pop
+sbt clean compile
 
-echo
-echo "### running party management backend"
-echo
-
-MAX_NETWORK=${MAX_NETWORK:='max2-network'}
-MAX_PARTY_MANAGEMENT_BACKEND_HOST=${MAX_PARTY_MANAGEMENT_BACKEND_HOST:='172.18.0.40'}
-echo "MAX_NETWORK: $MAX_NETWORK"
-echo "MAX_PARTY_MANAGEMENT_BACKEND_HOST: $MAX_PARTY_MANAGEMENT_BACKEND_HOST"
-echo
-
-docker run -d --name partymanagementbackend -h partymanagementbackend \
---network $MAX_NETWORK \
---ip $MAX_PARTY_MANAGEMENT_BACKEND_HOST \
--p 9000:9000 \
-max2-party-management-backend
+echo "## Starting party management backend ##"
+sbt clean compile run -Dhttp.port=9010
