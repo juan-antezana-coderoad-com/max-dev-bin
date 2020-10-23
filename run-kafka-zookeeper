@@ -62,3 +62,5 @@ sleep 10s
 docker-compose -f $DOCKER_COMPOSE_FILE up -d zookeeper
 sleep 5s
 docker-compose -f $DOCKER_COMPOSE_FILE up -d kafka
+sleep 5s
+create-topics
