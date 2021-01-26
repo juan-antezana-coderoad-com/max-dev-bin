@@ -1,0 +1,22 @@
+#!/bin/bash
+
+echo "Resetting IDEA trial period"
+echo "This script will reset all trial products"
+read -p "Press ENTER to continue"
+
+echo "1 removing key automatically (done)"
+rm ~/Library/Preferences/IntelliJIdea2019.1/eval/*.key
+rm ~/Library/Preferences/*jetbrains*.plist
+
+echo "2 remove all jetbrains keys (do manually)"
+# Remove all jetbrains keys
+open ~/Library/Preferences/com.apple.java.util.prefs.plist
+
+echo "3 remove all evl* properties (do manually)"
+# Remove all `evl*` properties
+open ~/Library/Preferences/IntelliJIdea2019.1/options/other.xml
+
+echo "4 kill preferences daemon or reboot mac"
+# Kill Preferences Daemon or Reboot Mac
+ps ax | grep "cfprefsd daemon" 
+

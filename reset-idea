@@ -1,0 +1,36 @@
+#!/bin/bash
+
+IDEA_SETTINGS="/home/user/.config/JetBrains"
+
+echo "Reset IDEA settings and license constraints"
+echo "Before continue QUIT IDEA"
+read -p "Press <ENTER> to continue"
+cd $IDEA_SETTINGS
+rm -rf config2
+mkdir -p config2/options
+echo "Creating a backup in file config.tar.gz just in case, please provide password"
+sudo tar -zcf config.tar.gz config 
+
+echo "Copying preferences files, some files may be missing depending on your configuration"
+cp config/options/javaeeAppServers.xml config2/options/
+cp config/options/recentProjects.xml config2/options/
+cp config/options/jdk.table.xml config2/options/
+cp config/options/ui.lnf.xml config2/options/
+cp config/options/vcs.xml config2/options/
+cp config/options/jprofiler.xml config2/options/
+cp config/options/VisualVMLauncher.xml config2/options/
+
+rm -f config/eval/*.key
+rm -rf config
+rm -rf ~/.java/.userPrefs/jetbrains/idea
+
+echo "Start IDEA and configure it to evaluate license (trial period)"
+echo "After configured Quit IDEA"
+read -p "Press <ENTER> to continue"
+# start idea
+# stop idea
+
+echo "Restoring settings"
+cd $IDEA_SETTINGS
+cp config2/options/*.* config/options
+echo "Reset settings DONE, start IDEA normally"	
