@@ -1,0 +1,24 @@
+#!/bin/bash -e
+echo
+echo "### removing tomcat"
+
+# delete mysql if exists
+if ! [[ -z `docker inspect --format="{{ .State.Running }}" tomcat` ]]; then
+  docker rm -f tomcat
+fi
+
+echo
+echo "### running tomcat"
+echo
+
+MAX_NETWORK=${MAX_NETWORK:='max-network'}
+MAX_TOMCAT_HOST=${MAX_TOMCAT_HOST:='172.18.0.96'}
+echo "MAX_NETWORK: $MAX_NETWORK"
+echo "MAX_TOMCAT_HOST: $MAX_TOMCAT_HOST"
+echo
+
+docker run -d --name tomcat -h tomcat \
+--network $MAX_NETWORK \
+--ip $MAX_TOMCAT_HOST \
+-p 8888:8080 \
+tomcat

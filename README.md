@@ -18,6 +18,7 @@
 - AWS Kinesis         : 85-89
 - Keycloak            : 90-91
 - HA proxy            : 95
+- Tomcat              : 96
 - Services            : 90-100
 
 ## CONTAINERS
