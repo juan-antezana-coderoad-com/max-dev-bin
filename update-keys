@@ -1,0 +1,4 @@
+#!/bin/bash -e
+echo "Updating keys"
+apt-key adv --refresh-keys --keyserver ha.pool.sks-keyservers.net
+echo "Updated keys successfully"
