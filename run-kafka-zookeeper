@@ -1,66 +1,32 @@
 #!/bin/bash -e
 echo
-echo "### removing zookeeper and kafka"
+echo "### removing kafka-zookeeper"
 
-# delete zookeeper, kafka if exists
-if ! [[ -z `docker inspect --format="{{ .State.Running }}" zookeeper` ]]; then
-  docker rm -f zookeeper
+# delete kafka-zookeeper if exists
+if ! [[ -z `docker inspect --format="{{ .State.Running }}" kafka-zookeeper` ]]; then
+  docker rm -f kafka-zookeeper
 fi
 
-if ! [[ -z `docker inspect --format="{{ .State.Running }}" kafka` ]]; then
-  docker rm -f kafka
-fi
-
-
 echo
-echo "### running kafka and zookeeper"
+echo "### running kafka-zookeeper"
 echo
 
+MAX_NETWORK=${MAX_NETWORK:='max-network'}
+MAX_KAFKA_ZOOKEEPER_HOST=${MAX_KAFKA_ZOOKEEPER_HOST:='172.18.0.80'}
 LOCAL_IP_ADDRESS=$(ipconfig getifaddr en0)
-export MAX_NETWORK=${MAX_NETWORK:='max-network'}
-export MAX_ZOOKEEPER_HOST=${MAX_ZOOKEEPER_HOST:='172.18.0.70'}
-export MAX_KAFKA_HOST=${MAX_KAFKA_HOST:='172.18.0.80'}
-export KAFKA_BROKER_ID='0'
-export KAFKA_ADVERTISED_HOST_NAME=$LOCAL_IP_ADDRESS
-#export LISTENERS_HOSTNAME='172.18.0.80'
-#export KAFKA_LISTENERS=PLAINTEXT://${LISTENERS_HOSTNAME}:9092
-#export KAFKA_ADVERTISED_LISTENERS=$LOCAL_IP_ADDRESS
-#export KAFKA_ADVERTISED_LISTENERS=PLAINTEXT://$LOCAL_IP_ADDRESS:9092
-export KAFKA_NUM_PARTITIONS='3'
-#export KAFKA_LOG_RETENTION_HOURS='168'
-#export KAFKA_LOG_RETENTION_BYTES='1073741824'
-export KAFKA_DELETE_TOPIC_ENABLE=true
-
-#export KAFKA_LOG_RETENTION_CHECK_INTERVAL_MS=100
-#export KAFKA_LOG_CLEANER_DELETE_RETENTION_MS=100
-export KAFKA_LOG_CLEANER_ENABLE=true
-export KAFKA_AUTO_CREATE_TOPICS_ENABLE=true
-#export KAFKA_LOG_CLEANER_MIN_CLEANABLE_RATIO=0.01
 echo "MAX_NETWORK: $MAX_NETWORK"
-echo "MAX_ZOOKEEPER_HOST: $MAX_ZOOKEEPER_HOST"
-echo "MAX_KAFKA_HOST: $MAX_KAFKA_HOST"
-#echo "KAFKA_BROKER_ID: $KAFKA_BROKER_ID"
-echo "KAFKA_ADVERTISED_HOST_NAME: $KAFKA_ADVERTISED_HOST_NAME"
-#echo "KAFKA_LISTENERS: $KAFKA_LISTENERS"
-#echo "KAFKA_ADVERTISED_LISTENERS: $KAFKA_ADVERTISED_LISTENERS"
-echo "KAFKA_NUM_PARTITIONS: $KAFKA_NUM_PARTITIONS"
-#echo "KAFKA_LOG_RETENTION_HOURS: $KAFKA_LOG_RETENTION_HOURS"
-#echo "KAFKA_LOG_RETENTION_BYTES: $KAFKA_LOG_RETENTION_BYTES"
-#echo "KAFKA_LOG_RETENTION_MINUTES: $KAFKA_LOG_RETENTION_MINUTES"
-echo "KAFKA_DELETE_TOPIC_ENABLE: $KAFKA_DELETE_TOPIC_ENABLE"
-#echo "KAFKA_LOG_RETENTION_CHECK_INTERVAL_MS: $KAFKA_LOG_RETENTION_CHECK_INTERVAL_MS"
-#echo "KAFKA_LOG_CLEANER_DELETE_RETENTION_MS: $KAFKA_LOG_CLEANER_ENABLE"
-echo "KAFKA_LOG_CLEANER_ENABLE: $KAFKA_LOG_CLEANER_ENABLE"
-echo "KAFKA_AUTO_CREATE_TOPICS_ENABLE: $KAFKA_AUTO_CREATE_TOPICS_ENABLE"
-#echo "KAFKA_LOG_CLEANER_MIN_CLEANABLE_RATIO: $KAFKA_LOG_CLEANER_MIN_CLEANABLE_RATIO"
+echo "MAX_KAFKA_ZOOKEEPER_HOST: $MAX_KAFKA_ZOOKEEPER_HOST"
+echo "LOCAL_IP_ADDRESS: $LOCAL_IP_ADDRESS"
 echo
 
-DOCKER_COMPOSE_FILE=$MAX_SRC_HOME/max-docker-kafka/docker-compose.yml
+docker run -d --name kafka-zookeeper -h kafka-zookeeper \
+--network $MAX_NETWORK \
+--ip $MAX_KAFKA_ZOOKEEPER_HOST \
+-p 2181:2181 \
+-p 9092:9092 \
+--env ADVERTISED_HOST=$LOCAL_IP_ADDRESS \
+--env ADVERTISED_PORT=9092 \
+spotify/kafka
 
-docker-compose -f $DOCKER_COMPOSE_FILE build
-sleep 10s
-docker-compose -f $DOCKER_COMPOSE_FILE up -d zookeeper
-sleep 5s
-docker-compose -f $DOCKER_COMPOSE_FILE up -d kafka
 sleep 5s
 create-topics
