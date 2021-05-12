@@ -13,13 +13,13 @@ echo " #°°°°°     °°°°° °°°°°   °°°°° °°°°° °°°°° 
 echo " ########################################################### "
 echo
 
-export CURRENT_DIRECTORY=`dirname "$BASH_SOURCE"`
+export CURRENT_DIRECTORY=$( cd "$(dirname "$0")" ; pwd -P )
 export MAX_SRC_HOME=`dirname "$CURRENT_DIRECTORY"`
 
 export MAX_NETWORK=max-network
 export MAX_SUBNET=172.18.0.0/23
 
-export MAX_HOSTNAME=$(ip route get 8.8.8.8 | awk '/8.8.8.8/ {print $NF}')
+export MAX_HOSTNAME=$(ipconfig getifaddr en0)
 export MAX_MYSQL_HOST='172.18.0.10'
 export MAX_ELASTIC_SEARCH_HOST='172.18.0.20'
 export MAX_ZOOKEEPER_HOST='172.18.0.70'

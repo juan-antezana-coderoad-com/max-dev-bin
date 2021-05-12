@@ -1,6 +1,6 @@
 #!/bin/bash
 
-BACKUP_HOME=${BACKUP_HOME:='/home/jantezana/Mojix/Veea/Backups/mysql-data/restore_backup'}
+BACKUP_HOME=${BACKUP_HOME:='/Users/jantezana/Desktop/Mojix/Veea/Backups/mysql-data/restore_backup'}
 USER_NAME=${USER_NAME:='root'}
 USER_PASSWORD=${USER_PASSWORD:='control123!'}
 MYSQL_PORT=3306

@@ -23,4 +23,4 @@ docker run -d --name elasticsearch -h elasticsearch \
 -p 9200:9200 \
 -p 9300:9300 \
 -v ~/docker-volumes/elasticsearch-data:/usr/share/elasticsearch/data \
-elasticsearch:2.3
+elasticsearch:2.3.0

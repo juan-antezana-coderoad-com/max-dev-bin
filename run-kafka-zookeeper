@@ -16,7 +16,7 @@ echo
 echo "### running kafka and zookeeper"
 echo
 
-LOCAL_IP_ADDRESS=$(ip -o route get to 8.8.8.8 | sed -n 's/.*src \([0-9.]\+\).*/\1/p')
+LOCAL_IP_ADDRESS=$(ipconfig getifaddr en0)
 export MAX_NETWORK=${MAX_NETWORK:='max-network'}
 export MAX_ZOOKEEPER_HOST=${MAX_ZOOKEEPER_HOST:='172.18.0.70'}
 export MAX_KAFKA_HOST=${MAX_KAFKA_HOST:='172.18.0.80'}
