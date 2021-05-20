@@ -1,0 +1,7 @@
+#!/bin/bash
+unset http_proxy
+unset https_proxy
+rm -rf ~/.ivy2/local
+rm -rf ~/.ivy2/cache/com.veea*
+rm -rf ~/.ivy2/cache/max2.com
+rm -rf ~/.sbt/
