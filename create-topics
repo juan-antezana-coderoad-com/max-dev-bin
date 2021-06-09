@@ -13,6 +13,7 @@ echo " Creating topics "
 echo "-----------------"
 echo
 create_topic BSSOrganization 3
+create_topic BOSSOrganization 3
 create_topic BSSProductOrder 3
 create_topic ProductOrderCreated 3
 create_topic organizationCreationNotification 3
